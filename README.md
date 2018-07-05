@@ -4,7 +4,7 @@ Resolution switcher for [video.js v5](https://github.com/videojs/video.js)
 
 ## Example
 
-[Working example](example.html) of the plugin you can check out if you're having trouble. Or check out this [demo](https://kmoskwiak.github.io/videojs-resolution-switcher/).
+[Working examples](examples) of the plugin you can check out if you're having trouble. Or check out this [demo](https://kmoskwiak.github.io/videojs-resolution-switcher/).
 
 ## Getting Started
 
@@ -74,6 +74,36 @@ bower install videojs-resolution-switcher
 
 ```
 
+
+### YouTube tech
+
+YouTube tech form https://github.com/eXon/videojs-youtube
+
+```html
+<video id='video' class="video-js vjs-default-skin"></video>
+<script src="../lib/videojs-resolution-switcher.js"></script>
+<script>
+	videojs('video', {
+		controls: true,
+		techOrder:  ["youtube"],
+		sources: [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=iD_MyDbP_ZE"}],
+		plugins: {
+			videoJsResolutionSwitcher: {
+				default: 'low',
+				dynamicLabel: true
+			}
+		}
+	}, function(){
+		var player = this;
+		player.on('resolutionchange', function(){
+			console.info('Source changed')
+		})
+	});
+
+</script>
+
+```
+
 ### Flash tech
 
 When using flash tech `preload="auto"` is required.
@@ -107,6 +137,7 @@ videojs('video', {
 * default - `{Number}|'low'|'high'` - default resolution. If any `Number` is passed plugin will try to choose source based on `res` parameter. If `low` or `high` is passed, plugin will choose respectively worse or best resolution (if `res` parameter is specified). If `res` parameter is not specified plugin assumes that sources array is sorted from best to worse.
 * dynamicLabel - `{Boolean}` - if `true` current label will be displayed in control bar. By default gear icon is displayed.
 * customSourcePicker - `{Function}` - custom function for selecting source.
+* ui - `{Boolean}` - If set to `false` button will not be displayed in control bar. Default is `true`.
 
 
 ## Methods
